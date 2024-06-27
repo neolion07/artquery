@@ -4,7 +4,7 @@ dofile "scripts/create.lua";
 function main()
 	local instance, conn = connectToDB();
 	
-	createDefault(conn);
+	createTables(conn);
 
 	conn:close();
 	instance:close();

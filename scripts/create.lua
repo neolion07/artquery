@@ -1,27 +1,57 @@
-function createDefault(conn)
-	local response = assert(conn:execute(
+function createTables(conn)
+	-- Check if the table exists:
+	local response, errMsg = conn:execute(
 		[[
-		CREATE TABLE IF NOT EXISTS paintings(
-			name varchar(64),
-			year INTEGER
-		)
+		SELECT * FROM paintings
 		]]
-	));
-
-	local list = {
-		{ name = "Mona Lisa", year = 1403, },
-		{ name = "Starry Night", year = 1629, },
-		{ name = "The Scream", year = 1772 }
-	};
-
-	for _, obj in ipairs(list) do
-		response = assert(conn:execute(
-			string.format(
-				[[
-				INSERT INTO paintings
-				VALUES ('%s', '%d')
-				]], obj.name, obj.year
+	);
+	if errMsg then
+		-- Create table for painting data:
+		response, errMsg = conn:execute(
+			[[
+			CREATE TABLE paintings(
+				id INT NOT NULL,
+				title VARCHAR(255),
+				year INT,
+				artist_id INT
 			)
-		));
+			]]
+		); --! fix artist_id and update ERD
+	end
+	
+	response, errMsg = conn:execute(
+		[[
+		SELECT * FROM locations
+		]]
+	);
+	if errMsg then
+		-- Create table for location data:
+		response, errMsg = conn:execute(
+			[[
+			CREATE TABLE locations(
+				id INT NOT NULL,
+				name VARCHAR(64)
+			)
+			]]
+		); --! update ERD to show this entity instead of categories
+	end
+	
+	response, errMsg = conn:execute(
+		[[
+		SELECT * FROM artists
+		]]
+	);
+	if errMsg then
+		-- create table for artist data:
+		response, errMsg = conn:execute(
+			[[
+			CREATE TABLE artists(
+				id INT NOT NULL,
+				fullname VARCHAR(127),
+				birth_date DATE,
+				birthplace_id INT
+			)
+			]]
+		); --! fix birthplace_id and update ERD
 	end
 end
