@@ -5,17 +5,20 @@ for a PostgreSQL database (model can be found <a href="ERD.png">here</a>).
 
 As for the program's features, it:
 
-* creates the three tables from the model with some default values
+* creates the three tables in the model and feeds them data from the
+<a href="https://api.artic.edu/docs">Art Institute of Chicago's public API</a>
 * provides basic functions to query the database (SELECT)
 * provides basic functions to maintain the database (INSERT, UPDATE and DELETE)
 
 # Dependencies
 
-Based on what was used to build this program:
+Based on what was used to build this project:
 
 * <a href="https://www.lua.org/">lua</a> >= 5.3
 * <a href="https://luarocks.org">luarocks</a> >= 3.11
-* <a href="https://lunarmodules.github.io/luasql/">luasql-postgres</a> >= 2.6.0 (available as a module for LuaRocks)
+* <a href="https://lunarmodules.github.io/luasocket">luasocket</a> >= 3.1.0
+* <a href="https://github.com/lunarmodules/luasec">luasec</a> >= 1.3.2
+* <a href="https://lunarmodules.github.io/luasql">luasql-postgres</a> >= 2.6.0 (available as a module for LuaRocks)
 * <a href="https://www.postgresql.org">postgresql</a> >= 16.3
 
 # How to use
