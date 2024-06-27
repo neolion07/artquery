@@ -21,6 +21,8 @@ Based on what was used to build this project:
 * <a href="https://lunarmodules.github.io/luasql">luasql-postgres</a> >= 2.6.0 (available as a module for LuaRocks)
 * <a href="https://www.postgresql.org">postgresql</a> >= 16.3
 
+This project also makes use of the <a href="https://github.com/rxi/json.lua">json.lua</a> module and is included in the `/scripts` directory.
+
 # How to use
 
 **These instructions assume you're running a GNU/Linux environment.**
