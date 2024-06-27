@@ -48,8 +48,8 @@ unix  2      [ ACC ]     STREAM     LISTENING     12345    /var/run/postgresql/.
 4. Rename the `.env.template` file to just `.env` and remove placeholder
 values in favor of the real values obtained in the previous steps.
 
-6. To run the program, call the Lua interpreter from the root directory of this
-project:
+6. To run the program, call the Lua interpreter from the `/scripts`
+directory of this project:
 ~~~bash
 $ lua main.lua
 ~~~

@@ -1,5 +1,5 @@
-dofile "scripts/connection.lua";
-dofile "scripts/create.lua";
+require "connection";
+require "create";
 ---[[
 function main()
 	local instance, conn = connectToDB();

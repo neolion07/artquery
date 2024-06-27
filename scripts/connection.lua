@@ -2,7 +2,7 @@
 local driver = require "luasql.postgres";
 
 -- Get the environment variables:
-dofile "scripts/envs.lua";
+require "envs";
 local envs = getEnvs();
 
 

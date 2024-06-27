@@ -23,7 +23,6 @@ function artistData()
 		sink = ltn12.sink.table(res)
 	});
 	res = json.decode(res[1]);
-	});
 	return res.data;
 end
 
@@ -31,6 +30,12 @@ function locationData()
 	return {};
 end
 
+local tab = artistData();
+for _, obj in pairs(tab) do
+	for k, v in pairs(obj) do
+		print(k, v);
+	end
+end
 --[==[
 	for _, obj in ipairs(list) do
 		response = assert(conn:execute(

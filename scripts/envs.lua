@@ -1,6 +1,6 @@
 function getEnvs()
 	-- open the file with the environment variables:
-	local file = assert( io.open(".env", "r") );
+	local file = assert( io.open("../.env", "r") );
 
 	-- table with default values:
 	local envs = {
