@@ -7,7 +7,7 @@ function artworkData()
 	local artist_id_list = {};
 
 	https.request({
-		url = "https://api.artic.edu/api/v1/artworks?fields=id,title,date_end,artist_id&limit=3",
+		url = "https://api.artic.edu/api/v1/artworks/search?query[exists][field]=artist_id&fields=id,title,date_end,place_of_origin,artist_id&limit=50",
 		method = "GET",
 		headers = {["Content-Type"] = "application/json"},
 		sink = ltn12.sink.table(res)
@@ -30,7 +30,7 @@ function artistData(artist_id_list)
 		end
 	end
 	https.request({
-		url = string.format("%s",req_url.."&fields=id,title,birth_date&limit=3"),
+		url = string.format("%s",req_url.."&fields=id,title,birth_date"),
 		method = "GET",
 		headers = {["Content-Type"] = "application/json"},
 		sink = ltn12.sink.table(res)
@@ -42,34 +42,57 @@ end
 function locationData()
 	-- ...The API does not provide location data for artworks or artists,
 	-- so I had to set this up myself.
-	return
+	return -- non-country names will be set as Undefined
 	{
-		{ id = 1, name = "" },
-		{ id = 2, name = "" },
-		{ id = 3, name = "" },
-		{ id = 4, name = "" },
-		{ id = 5, name = "" },
-		{ id = 6, name = "" },
-		{ id = 7, name = "" },
-		{ id = 8, name = "" },
-		{ id = 9, name = "" },
-		{ id = 10, name = "" },
-		{ id = 11, name = "" },
-		{ id = 12, name = "" },
-	};
+		{ id = 1, name = "Undefined" },
+		{ id = 2, name = "United States" },
+		{ id = 3, name = "France" },
+		{ id = 4, name = "Mexico" },
+		{ id = 5, name = "Spain" },
+		{ id = 6, name = "Germany" },
+		{ id = 7, name = "England" },
+		{ id = 8, name = "Japan" },
+		{ id = 9, name = "Norway" },
+		{ id = 10, name = "Holland" },
+		{ id = 11, name = "Netherlands" },
+		{ id = 12, name = "Republic of the Congo" },
+		{ id = 13, name = "Canada" },
+		{ id = 14, name = "Belgium" },
+		{ id = 15, name = "Italy" },
+		{ id = 16, name = "Scotland" },
+		{ id = 17, name = "Switzerland" },
+		{ id = 18, name = "Egypt" },
+		{ id = 19, name = "Russia" },
+		{ id = 20, name = "India" },
+		{ id = 21, name = "Kenya" },
+		{ id = 22, name = "Gabon" },
+		{ id = 23, name = "South Africa" },
+		{ id = 24, name = "Austria" },
+		{ id = 25, name = "Turkey" },
+		{ id = 26, name = "China" },
+		{ id = 27, name = "Indonesia" },
+		{ id = 28, name = "Iran" },
+		{ id = 29, name = "Peru" },
+		{ id = 30, name = "Greece" },
+		{ id = 31, name = "Ireland" },
+		{ id = 32, name = "Venezuela" },
+		{ id = 33, name = "Ancient Greece" },
+		{ id = 34, name = "Brazil" },
+		{ id = 35, name = "Colombia" },
+		{ id = 36, name = "Argentina" },
+		{ id = 37, name = "Uruguay" },
+		{ id = 38, name = "Paraguay" },
+		{ id = 39, name = "Chile" },
+		{ id = 40, name = "Ecuador" },
+		{ id = 41, name = "Bolivia" },
+		{ id = 42, name = "Guatemala" },
+		{ id = 43, name = "Cuba" },
+		{ id = 44, name = "Portugal" },
+		{ id = 45, name = "Israel" },
+		{ id = 46, name = "Ukraine" },
+		{ id = 47, name = "Thailand" },
+		{ id = 48, name = "Finland" },
+		{ id = 49, name = "Denmark" },
+		{ id = 50, name = "Poland" },
+};
 end
-
---[[
-local tab = artworkData();
-for _, obj in pairs(tab) do
-	for k, v in pairs(obj) do
-		if type(v) == type({}) then
-			for i = 1, #v do
-				print("artist id: "..v[i])
-			end
-		else
-			print(k, v);
-		end
-	end
-end
---]]
