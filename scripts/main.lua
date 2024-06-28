@@ -3,6 +3,7 @@ require "connection";
 require "create";
 require "feed-data";
 require "display";
+require "help";
 ---[[
 function main()
 	local instance, conn = connectToDB();
@@ -64,6 +65,10 @@ function main()
 				createTables(conn);
 				feed(conn);
 				
+			-- Print help:
+			elseif command == ".help" then
+				help();
+				
 			-- For non-existent options:
 			else
 				print("INVALID OPTION");
@@ -78,7 +83,6 @@ function main()
 	conn:close();
 	instance:close();
 	sleep(2.5);
-	os.exit(0);
 end
 --]]
 
