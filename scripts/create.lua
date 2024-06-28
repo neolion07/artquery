@@ -67,7 +67,7 @@ function createTables(conn)
 			id INT NOT NULL,
 			title VARCHAR(255),
 			year INT,
-			artist_id INT,
+			artist_id INT NOT NULL,
 			origin_place_id INT,
 			PRIMARY KEY (id),
 			FOREIGN KEY (artist_id) REFERENCES artists(id),
