@@ -5,6 +5,7 @@ json = require "json";
 function artworkData()
 	local res = {};
 	local artist_id_list = {};
+
 	https.request({
 		url = "https://api.artic.edu/api/v1/artworks?fields=id,title,date_end,artist_id&limit=3",
 		method = "GET",
@@ -12,17 +13,24 @@ function artworkData()
 		sink = ltn12.sink.table(res)
 	});
 	res = json.decode(res[1]);
+
 	for _, obj in pairs(res.data) do
-		table.push(artist_id_list, obj.artist_id);
+		table.insert(artist_id_list, obj.artist_id);
 	end
 	return res.data, artist_id_list;
 end
 
 function artistData(artist_id_list)
 	local res = {};
-	local ;
+	local req_url = "https://api.artic.edu/api/v1/artists?ids=";
+	for i=1, #artist_id_list do
+		req_url = string.format("%s%d", req_url, artist_id_list[i]);
+		if i < #artist_id_list then
+			req_url = req_url..",";
+		end
+	end
 	https.request({
-		url = string.format"https://api.artic.edu/api/v1/artists/%d?fields=id,title,birth_date&limit=3",
+		url = string.format("%s",req_url.."&fields=id,title,birth_date&limit=3"),
 		method = "GET",
 		headers = {["Content-Type"] = "application/json"},
 		sink = ltn12.sink.table(res)
