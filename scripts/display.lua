@@ -1,5 +1,5 @@
-function display(...)
-	local conn, table_name, query, filter_field, filter_value = ...;
+function display(conn, table_name, query, ...)
+	local filter_field, filter_value = ...;
 	---[==[
 	local cursor, errMsg = 0, nil;
 	if query == "" then
@@ -35,6 +35,13 @@ function display(...)
 
 	-- Print column names and their respective values for each row:
 	local row = cursor:fetch({}, "a");
+
+	if not row then
+		io.write("No results.\n");
+		cursor:close();
+		return;
+	end
+
 	local counter = 1;
 	while row do
 		io.write(
