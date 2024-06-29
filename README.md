@@ -58,3 +58,9 @@ directory of this project:
 ~~~bash
 $ lua main.lua
 ~~~
+
+# Known issues
+
+* The program may raise an error from the `json.lua` module
+and fail to start between consecutive executions. If that happens,
+wait a few seconds before running it again.
