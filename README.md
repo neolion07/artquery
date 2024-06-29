@@ -8,7 +8,7 @@ As for the program's features, it:
 * creates the three tables in the model and feeds them data from the
 <a href="https://api.artic.edu/docs">Art Institute of Chicago's public API</a>
 * provides basic functions to query the database (SELECT)
-* provides basic functions to maintain the database (INSERT, UPDATE and DELETE)
+* provides basic functions to maintain the database (UPDATE and DELETE)
 
 # Dependencies
 
