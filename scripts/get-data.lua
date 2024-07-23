@@ -13,7 +13,7 @@ function artworkData()
 		sink = ltn12.sink.table(res)
 	});
 	res = json.decode(res[1]);
-
+	
 	for _, obj in pairs(res.data) do
 		table.insert(artist_id_list, obj.artist_id);
 	end

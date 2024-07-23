@@ -24,54 +24,44 @@ function main()
 			if command == ".show" then
 				io.write("Enter the table's name: ");
 				local table_name = io.read("l");
-				table_name = table_name:gsub(";", ""); -- to prevent cursed input
+				table_name = table_name:gsub("[^%w,_]", ""); -- fix cursed input
 				
 				io.write(
-				"Enter a query (enter * to show all columns, "
-				.."or separate multiple column names with commas): ");
+				"Enter a query (column names separated by commas, or * to show all columns): ");
 				local query = io.read("l");
-				query = query:gsub(";", "");
+				query = query:gsub("[^%w,_%*]", "");
 				
 				io.write("Enter a field to filter results by (empty for none): ");
 				local filter_field = io.read("l");
-				filter_field = filter_field:gsub(";", "");
-				filter_field = filter_field:gsub("=", "");
-				filter_field = filter_field:gsub(">", "");
-				filter_field = filter_field:gsub("<", "");
-
+				filter_field = filter_field:gsub("[^%w_]", "");
+				
 				local filter_value = "";
 				if filter_field ~= "" then
 					io.write("Enter a value for the filter: ");
 					filter_value = io.read("l")
-					filter_value = filter_value:gsub(";", "");
+					filter_value = filter_value:gsub("[^%w]", "");
 				end
 				display(
 					conn,
-					table_name:gsub(" ", ""),
-					query:gsub(" ", ""),
-					filter_field:gsub(" ", ""),
-					filter_value:gsub(" ", "")
+					table_name,
+					query,
+					filter_field,
+					filter_value
 				);
 
 			-- Update rows:
 			elseif command == ".update" then
 				io.write("Enter the table's name: ");
 				local table_name = io.read("l");
-				table_name = table_name:gsub(";", "");
-				table_name = table_name:gsub(" ", "");
+				table_name = table_name:gsub("[^%w_]", "");
 				
 				io.write("Enter the row's ID: ");
 				local id = io.read("l");
-				id = id:gsub(";", "");
-				id = id:gsub(" ", "");
+				id = id:gsub("[^%d]", "");
 				
-				io.write(
-					"Enter column names and their new values "
-					.."(separate with commas): "
-				);
+				io.write("Enter column names and their new values (separate with commas): ");
 				local new_columns = io.read("l");
-				new_columns = new_columns:gsub(";", "");
-				new_columns = new_columns:gsub(" ", "");
+				new_columns = new_columns:gsub("[^%w,_=]", "");
 				
 				updateById(conn, table_name, id, new_columns);
 				
@@ -79,13 +69,11 @@ function main()
 			elseif command == ".delete" then
 				io.write("Enter the table's name: ");
 				local table_name = io.read("l");
-				table_name = table_name:gsub(";", "");
-				table_name = table_name:gsub(" ", "");
+				table_name = table_name:gsub("[^%w_]", "");
 				
 				io.write("Enter the row's ID: ");
 				local id = io.read("l");
-				id = id:gsub(";", "");
-				id = id:gsub(" ", "");
+				id = id:gsub("[^%d]", "");
 				
 				deleteById(conn, table_name, id);
 				
